@@ -6,6 +6,47 @@ Ce projet analyse les profils moyens d'investisseurs à partir de données démo
 L'objectif est de segmenter les investisseurs en **clusters** et de comprendre leurs comportements en matière de risque, épargne et consommation.
 
 ---
+# 🧪 Modèles Utilisés : GMM vs K-Means
+
+Dans ce projet, nous avons testé **deux approches de clustering** différentes pour segmenter les investisseurs :
+
+---
+
+## 🔹 1️⃣ Modèle GMM (Gaussian Mixture Model) – k = 3
+
+### ✔ Principe :
+GMM suppose que les données proviennent d’un mélange de distributions gaussiennes (normales).  
+Contrairement à K-Means, GMM :
+- ne force pas les clusters à être circulaires,
+- gère mieux les formes complexes,
+- attribue des **probabilités** d’appartenance à chaque cluster.
+
+### ✔ Pourquoi k = 3 ?
+Après test des métriques ( visualisation), **3 clusters** donnaient une meilleure cohérence pour GMM.
+
+---
+
+## 🔹 2️⃣ Modèle K-Means – k = 4
+
+### ✔ Principe :
+K-Means regroupe les individus en minimisant la distance au centre du cluster.  
+Il est rapide, simple, mais impose des clusters sphériques.
+
+### ✔ Pourquoi k = 4 ?
+Selon l’Elbow Method + silhouette score, **4 clusters** donnaient la segmentation la plus stable pour K-Means.
+
+---
+
+## 🎯 Conclusion
+
+- **K-Means (k = 4)** : segmentation simple, rapide, efficace.  
+- **GMM (k = 3)** : segmentation plus flexible, clusters plus réalistes.  
+
+Utiliser les deux modèles permet :
+- de comparer les résultats,  
+- de valider la robustesse des clusters,  
+- d’obtenir une meilleure compréhension des profils d’investisseurs.
+
 
 ## Données
 Le dataset contient les colonnes suivantes :  
@@ -25,7 +66,7 @@ Le dataset contient les colonnes suivantes :
 
 ---
 
-## Profil moyen de chaque cluster
+## Profil moyen de chaque cluster en utlise  (K Means)
 
 | Cluster   | Profil général                         | Description analytique |
 |-----------|----------------------------------------|-----------------------|
@@ -35,6 +76,14 @@ Le dataset contient les colonnes suivantes :
 | Cluster 3 | 🧒 Jeunes célibataires débutants        | 🔹 Très jeunes (AGE ≈ 2) <br> 🔹 Peu expérimentés (LIFECL ≈ 2.3) <br> 🔹 Célibataires (MARRIED ≈ 1.8) → plutôt non mariés <br> 🔹 Peu d’enfants (≈ 0.5) <br> 🔹 Revenus faibles (INCCL ≈ 2-3) <br> 🔹 Prise de risque modérée (RISK ≈ 3.2) <br> 🟢 => Jeunes actifs en début de carrière, avec un comportement financier variable, parfois influencé par la consommation (SPENDMOR). |
 
 ---
+
+## 📊 Profil moyen de chaque cluster en utlise (GMM)
+
+| Cluster   | Profil général                         | Description analytique |
+|-----------|----------------------------------------|-----------------------|
+| **Cluster 0** | 🧩 **Jeunes familles prudentes** | 🔹 Âge moyen faible (≈ 2) → jeunes adultes <br> 🔹 Éducation moyenne (≈ 2.3) <br> 🔹 Mariés souvent (1.07 ≈ mariés) <br> 🔹 Enfants présents (≈ 2) <br> 🔹 Faible niveau professionnel (OCCAT ≈ 1.3) <br> 🔹 Forte tolérance au risque (RISK ≈ 3.4) <br> 🔹 Revenus et patrimoine moyens <br> 🟢 **=> Jeunes ménages actifs, modérément prudents mais prêts à prendre des risques pour faire croître leur épargne.** |
+| **Cluster 1** | 💼 **Investisseurs expérimentés et aisés** | 🔹 Âge élevé (≈ 4.9) → adultes mûrs <br> 🔹 Niveau d’étude modéré (≈ 2.5) <br> 🔹 Mariés (≈ 1.5) <br> 🔹 Peu ou pas d’enfants <br> 🔹 Très haut niveau de vie (LIFECL ≈ 5.6) <br> 🔹 Bon poste (OCCAT ≈ 2.6) <br> 🔹 RISK ≈ 3.4 → bons preneurs de risque <br> 🟢 **=> Investisseurs mûrs, avec bons revenus, prêts à investir de manière stratégique et plus risquée.** |
+| **Cluster 2** | ⚖️ **Classe moyenne stable et prudente** | 🔹 Âge moyen (≈ 3.1) <br> 🔹 Niveau d’étude élevé (≈ 3.6) <br> 🔹 Peu
 
 ## Visualisations
 - Radar charts pour chaque cluster (Python / Matplotlib)  
@@ -51,6 +100,6 @@ Le dataset contient les colonnes suivantes :
 ---
 
 ## Auteur
-**Sofien Meftahi** – Étudiant / Data Analyst en herbe  
+**Sofien Meftahi** – Étudiant / Data Analyst 
 
 
